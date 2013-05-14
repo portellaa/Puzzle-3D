@@ -1,0 +1,212 @@
+/* 
+ * File:   rendering.c
+ * Author: Luis Portela, 36170
+ * Author: Rui Martins, 38282
+ *
+ * Created on November 24, 2011, 12:18 PM
+ */
+
+#include <GL/glut.h>
+
+#include "estDados.h"
+#include "globais.h"
+#include "rendering.h"
+
+
+/* ----------------------------------------------------------------------- */
+
+/* ----------------FOCOS--------------*/
+/* Posiciona o foco na cena */
+void posicionaFoco(pontFoco pFoco) {
+
+	if (pFoco->focoIsOn) {
+
+		/* Inicializar o primeiro pFoco --- GL_LIGHT0 */
+		glEnable(GL_LIGHT0);
+
+		/* As componentes de iluminacao */
+		glLightfv(GL_LIGHT0, GL_AMBIENT, pFoco->compAmbiente);
+		glLightfv(GL_LIGHT0, GL_DIFFUSE, pFoco->compDifusa);
+		glLightfv(GL_LIGHT0, GL_SPECULAR, pFoco->compEspecular);
+	} else {
+		glDisable(GL_LIGHT0);
+	}
+
+	glPushMatrix();
+
+	/* As transformacoes a aplicar ao foco */
+	glTranslatef(pFoco->translX, pFoco->translY, pFoco->translZ);
+
+	/* Rotacao relativamente ao eixo ZZ */
+	glRotatef(pFoco->angRotZZ, 0.0, 0.0, 1.0);
+
+	/* Rotacao relativamente ao eixo YY */
+	glRotatef(pFoco->angRotYY, 0.0, 1.0, 0.0);
+
+	/* Rotacao relativamente ao eixo XX */
+	glRotatef(pFoco->angRotXX, 1.0, 0.0, 0.0);
+
+	/* Posicionar o primeiro foco */
+	glLightfv(GL_LIGHT0, GL_POSITION, pFoco->posicao);
+
+	/* Restaurar a matrix de transformacao */
+	glPopMatrix();
+}
+
+/* Desenho o foco usando listas de desenho */
+void desenhaFocoUsandoListaDeDesenho(pontFoco pFoco) {
+
+	/* Representacao simplificada de um foco pontual, 
+	   como uma pequena esfera */
+
+	if (!(pFoco->focoIsOn)) {
+		return ;
+	}
+
+	glPushMatrix();
+
+	/* Posicionar a esfera, usando as transformacoes do foco */
+	glTranslatef(pFoco->translX, pFoco->translY, pFoco->translZ);
+
+	/* Rotacao relativamente ao eixo ZZ */
+	glRotatef(pFoco->angRotZZ, 0.0, 0.0, 1.0);
+
+	/* Rotacao relativamente ao eixo YY */
+	glRotatef(pFoco->angRotYY, 0.0, 1.0, 0.0);
+
+	/* Rotacao relativamente ao eixo XX */
+	glRotatef(pFoco->angRotXX, 1.0, 0.0, 0.0);
+
+	/* Posicionando-o no local desejado */
+	glTranslatef(pFoco->posicao[0], pFoco->posicao[1], pFoco->posicao[2]);
+
+	glCallList(pFoco->listaDeDesenho);
+
+	glPopMatrix();
+}
+
+/* Cria a lista de desenho para o foco */
+void criaListaDeDesenhoParaFoco(pontFoco pFoco) {
+
+	/* Associa ao registo de foco a sua lista de desenho */
+	pFoco->listaDeDesenho = glGenLists(1);
+
+	glNewList(pFoco->listaDeDesenho, GL_COMPILE);
+
+	/* Representar a esfera, mas desligando o modo de iluminacao */
+	glDisable(GL_LIGHTING);
+
+	/* Usar a cor especificada para a componente difusa */
+	glColor4fv(pFoco->compDifusa);
+
+	glutSolidSphere(0, 10, 10);
+
+	glEnable(GL_LIGHTING);
+
+	glEndList();
+}
+
+
+/* ------------------------------------------------------- */
+/* ----------- PUZZLE --------- */
+
+/* Funcao para desenhar modelo atraves da lista de desenho */
+void desenhaModeloUsandoListaDeDesenho(PecaPuzzle pecaPuzzle) {
+
+	/* Propriedades do material do modelo */
+	glMaterialfv(GL_FRONT, GL_AMBIENT, pecaPuzzle->material->coefReflAmbiente);
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, pecaPuzzle->material->coefReflDifusa);
+	glMaterialfv(GL_FRONT, GL_SPECULAR, pecaPuzzle->material->coefReflEspecular);
+	glMaterialfv(GL_FRONT, GL_SHININESS, pecaPuzzle->material->coefDePhong);
+
+	/* Salvaguardar a matriz de transformacao corrente */
+	glPushMatrix();
+
+	/* As transformacoes a aplicar realtivamente ao Centro de Massa */
+	/* ORDEM INVERSA */
+	glTranslated(pecaPuzzle->translacao[0], pecaPuzzle->translacao[1], pecaPuzzle->translacao[2]);
+
+	/* Rotacao relativamente ao eixo ZZ */
+	glRotated(pecaPuzzle->angulo[2], 0.0, 0.0, 1.0);
+
+	/* Rotacao relativamente ao eixo YY */
+	glRotated(pecaPuzzle->angulo[1], 0.0, 1.0, 0.0);
+
+	/* Rotacao relativamente ao eixo XX */
+	glRotated(pecaPuzzle->angulo[0], 1.0, 0.0, 0.0);
+
+	glScaled(pecaPuzzle->factor[0], pecaPuzzle->factor[1], pecaPuzzle->factor[2]);
+
+	glCallList(pecaPuzzle->listaDesenho);
+
+	/* Restaurar a matriz de transformacao */
+	glPopMatrix();
+}
+
+/* Contruir o puzzle usando listas de desenho */
+void constroiCenaUsandoListasDeDesenho(void) {
+
+	int i;
+
+	glPushMatrix();
+
+	/* Todas as entidades da cena sofrem uma translacao, para serem visiveis 
+	   em projeccao perspectiva. */
+	//glTranslatef(0.0, 0.0, -(CUBO_SIZE * 11));
+	
+	posicionaFoco(pFoco);
+	
+	desenhaFocoUsandoListaDeDesenho(pFoco);
+
+	/* Sombreamento */
+	glShadeModel(GL_SMOOTH);
+
+	for (i = 0; i < totalPecas; i++) {
+		desenhaModeloUsandoListaDeDesenho(PecasPuzzle[i]);
+	}
+
+	glPopMatrix();
+}
+
+/* Funcao para criar*/
+void criaListaDeDesenho(PecaPuzzle pCubo) {
+
+	int i, j, k;
+
+	/* Associa ao registo de modelo a sua lista de desenho */
+	pCubo->listaDesenho = glGenLists(1);
+
+	/* Criar a pea do puzzle percorrendo todos os cubos e associando-os a lista */
+	glNewList(pCubo->listaDesenho, GL_COMPILE);
+
+	/* Percorrer todos os cubos da peca e compila-los para a lista */
+	for (i = 0; i < pCubo->numCubos; i++) {
+
+		glBegin(GL_QUADS);
+
+		for (j = 0; j < NUM_FACES_CUBO; j++) {
+			glNormal3fv(pCubo->listaCubos[i]->normais[j]);
+			for (k = 0; k < NUM_VERTICES_FACE; k++) {
+				glVertex3fv(verticeFace(k, j, pCubo->listaCubos[i]));
+			}
+		}
+
+		glEnd();
+	}
+
+	glEndList();
+}
+
+/* Constroi listas de desenho para todas as pecas */
+void controiListaDeDesenhoPecasPuzzle(void) {
+
+	int i;
+
+	for (i = 0; i < totalPecas; i++) {
+		criaListaDeDesenho(PecasPuzzle[i]);
+	}
+}
+
+
+
+

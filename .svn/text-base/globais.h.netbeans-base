@@ -1,0 +1,225 @@
+/* 
+ * File:   globais.h
+ * Author: Luis Portela, 36170
+ * Author: Rui Martins, 38282
+ *
+ * Created on November 24, 2011, 11:47 AM
+ */
+
+
+#ifndef globais_h
+#define globais_h
+
+#include <GL/glut.h>
+
+#define ZNEARPERS 0.1
+#define ZFARPERS 50
+
+#define ZNEARORTH -20
+#define ZFARORTH 20
+
+#define MAX_LINE_SIZE 200       //DEFAULT = 200
+#define NUM_VERTICES_FACE 4     //DEFAULT = 4
+#define NUM_FACES_CUBO 6        //DEFAULT = 6
+#define HALF_CUBO_SIZE 0.1      //DEFAULT = 0.1
+#define CUBO_SIZE 0.2  //DEFAULT = HALF_CUBO_SIZE * 2
+#define VEL_ROTACAO 6   //DEFAULT = 6   /* Velocidade de rota??o das anima??es quando premida uma tecla */ 
+#define VEL_TRANSLACAO 2        //DEFAULT = 2   /* Velocidade de transla??o das anima??es quando premida uma tecla */ 
+
+#define PATH_FILES "/Users/meligaletiko/Desktop/"
+//#define PATH_FILES "/home/crazydj/Niveis/"
+#define MIN_LEVELS 1 //Numero do Primeiro ficheiro Nivel
+#define MAX_LEVELS 5 //Numero do Ultimo Ficheiro Nivel
+#define MAX_PALAVRAS_LINHA 3 //Numero m?ximo de palavras por linha
+
+#define XX      1
+#define Xx      2
+#define YY      3
+#define Yy      4
+#define ZZ      5
+#define Zz      6
+
+#define ROTACAO         69
+#define TRANSLACAO      666
+
+/* Dimens?es onde o cubo pode ser desenhado */
+#define LIM_MAX_X 2.8
+#define LIM_MIN_X -2.8
+#define LIM_MAX_Y 2.8
+#define LIM_MIN_Y -2.8
+#define LIM_MAX_Z 2.8
+#define LIM_MIN_Z -2.8
+
+#define LIM_MAT_X (int)((LIM_MAX_X - LIM_MIN_X)/0.4)
+#define LIM_MAT_Y (int)((LIM_MAX_Y - LIM_MIN_Y)/0.4)
+#define LIM_MAT_Z (int)((LIM_MAX_Z - LIM_MIN_Z)/0.4)
+
+/* Limites dos modelos em modo perpectiva */
+#define MINPERSPZ (3.0 + CUBO_SIZE)
+
+/* ----------------------------------------------------------------------- */
+
+/* Estructura do ponto 3D que ? um array com 3 posic?es de GLfloat */
+typedef GLfloat* ponto3D;
+
+typedef GLfloat* vector3D;
+
+/* Array de indices dos seus 4 vertices */
+typedef ponto3D* face;
+typedef ponto3D* verticesCubo;
+
+/* Estructura das propriedades dos materiais */
+typedef struct {
+    GLfloat coefReflAmbiente[4];
+    GLfloat coefReflDifusa[4];
+    GLfloat coefReflEspecular[4];
+    GLfloat coefDePhong[1];
+
+} Registo_Props_Material;
+
+typedef Registo_Props_Material *pontPropsMaterial;
+
+/* Estructura cubo lido ficheiro */
+typedef struct {
+    int numCubos;
+
+    ponto3D coordCuboPrinc;
+    ponto3D* coordOutrosCubos;
+
+} Estructura_Peca;
+typedef Estructura_Peca *Peca;
+
+/* Array de v?rias pe?as no formato lidas do ficheiro */
+typedef struct {
+    int numPecas;
+
+    Peca* listaPecas;
+} Estructura_ArrayPecas;
+typedef Estructura_ArrayPecas *ArrayPecas;
+
+/* Registo para guardar toda a informacao de um cubo */
+typedef struct {
+    /* Ponteiros para as faces */
+    face* faces;
+    
+    vector3D* normais;
+
+} Estructura_Cubo;
+typedef Estructura_Cubo *pontCubo;
+
+/* Estructura para guardar a informacao de uma pe?a do puzzle*/
+typedef struct {
+    GLint numCubos;
+
+    pontCubo* listaCubos;
+    
+    ponto3D tamanho;
+
+    GLuint listaDesenho;
+
+    /* Propriedades */
+    pontPropsMaterial material;
+
+    //TODO: Mudei de Float para Double para evitar que o PC arredonda-se os valores, tipo 0.2 para 0.199999,
+    //porque depois dava problemas ao fazer as comparações para ver se o puzzle estava completo...
+    
+    /* Parametros das transformacoes */
+    double* translacaoOriginal;
+    double* translacao;
+    double* angulo;
+    double* factor;
+
+    /* Controlos de animacao */
+    int rotacaoOnXX, rotacaoOnYY, rotacaoOnZZ;
+
+} Estructura_PecaPuzzle;
+typedef Estructura_PecaPuzzle *PecaPuzzle;
+
+/* Registo para guardar as caracteristicas e os parametros globais 
+   de transformacao de um foco                                      */
+typedef struct {
+    int focoPontual;
+    int focoIsOn;
+
+    /* Posicao em Coordenada Homogeneas */
+    GLfloat posicao[4];
+
+    GLuint listaDeDesenho;
+
+    GLfloat compAmbiente[4];
+    GLfloat compDifusa[4];
+    GLfloat compEspecular[4];
+
+    /* Parametros das transformacoes */
+    float translX, translY, translZ;
+
+    float angRotXX, angRotYY, angRotZZ;
+
+    /* Controlos de animacao */
+    int rotacaoOnXX, rotacaoOnYY, rotacaoOnZZ;
+
+} Registo_Foco;
+typedef Registo_Foco *pontFoco;
+
+typedef struct {
+    
+    int rotacaoEmX;
+    int rotacaoEmY;
+    
+    GLfloat valorX;
+    GLfloat valorY;
+    
+} Estructura_Visualizador;
+typedef Estructura_Visualizador *Pessoa;
+
+
+/* -------------------------------------------------------------------------- */
+/*** Variaveis Globais ***/
+
+/* Variavel global para guardar o cubo selecionado */
+int16_t pecaSelec;
+uint16_t totalPecas;
+
+/* Ponteiro para o UNICO foco de luz deste exemplo */
+pontFoco pFoco;
+
+/* Ponteiro para o array de pecas */
+PecaPuzzle* PecasPuzzle; //Onde ficam armazenadas todas as pe?as
+ArrayPecas TodasPecas; //Este ? temporario
+
+Pessoa Visualizador;
+
+
+/* Ponteiros para os registos com os materiais disponiveis */
+pontPropsMaterial pMaterialBronze, pMaterialBronzePolido,
+pMaterialCobre, pMaterialCobrePolido,
+pMaterialCromio, pMaterialLatao,
+pMaterialOuro, pMaterialOuroPolido,
+pMaterialPlasticoVermelho,
+pMaterialEsmeralda, pMaterialJade,
+pMaterialRubi, pMaterialPerola,
+pMaterialAzulMtoBrilhante;
+
+pontPropsMaterial* listaMateriais;
+pontPropsMaterial materialSelec;
+
+
+/* Timer --- Intervalo de tempo */
+unsigned int intervaloDeTempo;
+
+/* Variavel Temporaria para testes */
+/* Vai indicar quantos graus a pe?a tem que rodar, enquanto diferente de zero, soma-se este valor */
+int tmpRedisplayRXX;
+int tmpRedisplayRYY;
+int tmpRedisplayRZZ;
+
+float tmpRedisplayTXX;
+float tmpRedisplayTYY;
+float tmpRedisplayTZZ;
+
+int tmpShuffle;
+int NivelActual;
+
+int Matriz[LIM_MAT_X][LIM_MAT_Y][LIM_MAT_Z];
+/* ----------------------------------------------------------------------- */
+#endif

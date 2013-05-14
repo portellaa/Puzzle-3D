@@ -1,0 +1,85 @@
+#########################################################################################################
+# Parametros Iniciais: Numero de Peças neste Puzzle, incluindo a peça de referencia:
+# Significa que este nivel e' composto por n pecas:
+4
+# 1ª Peca contem n Cubos. n=
+24
+# 2ª Peca contem n Cubos. n=
+10
+# 3ª Peca
+7
+# 4ª Peca
+14
+########################################################################################################
+
+# 1ª Peça:
+# Cordenadas do 1º Cubo: [X Y Z]
+-4 1 0
+# Coordenadas Relativas dos Restantes Cubos em Relação ao 1º Cubo
+-1 1 0
+0 1 0
+1 1 0
+-1 0 0
+1 0 0
+2 0 0
+-1 -1 0
+0 -1 0
+1 -1 0
+0 -2 0
+# Coordenadas em Z
+0 0 1
+0 0 -1
+-1 1 -1
+0 1 -1
+1 1 -1
+-1 0 -1
+1 0 -1
+2 0 -1
+-1 -1 -1
+0 -1 -1
+1 -1 -1
+0 -2 -1
+0 0 -2
+
+# 2ª Peça:
+# Coordenada do 1º Cubo:
+0 1 0
+# Coordenadas Relativas dos restantres Cubos
+-2 1 0
+-1 1 0
+0 1 0
+1 1 0
+-1 0 0
+1 0 0
+-2 -1 0
+-1 -1 0
+1 -1 0
+
+# 3ª Peça:
+# Coordenada do Cubo de Referencia:
+-5 -1 0
+## Coordenadas Relativas
+0 -1 0
+0 -2 0
+1 -1 0
+1 -2 0
+2 0 0
+2 -2 0
+
+# 4ª Peça:
+-1 -2 0
+# Pecas relativas
+-1 1 0
+0 1 0
+1 1 0
+1 2 0
+2 1 0
+-1 0 0
+-2 0 0
+1 0 0
+2 0 0
+-1 -1 0
+0 -1 0
+1 -1 0
+2 -1 0
+########################################################################################################

@@ -1,0 +1,24 @@
+# Parametros Iniciais: Numero de Peças neste Puzzle, incluindo a peça de referencia:
+# Significa que este nivel e' composto por duas pecas:
+2
+# 1ª Peca contem n Cubos. n=
+4
+# 2ª Peca contem n Cubos. n=
+5
+
+# 1ª Peça:
+# Cordenadas do 1º Cubo: [X Y Z]
+1 1 0
+# Coordenadas Relativas dos Restantes Cubos em Relação ao 1º Cubo
+1 0 0
+1 1 0
+0 1 0
+
+# 2ª Peça:
+# Coordenada do 1º Cubo:
+0 0 0
+# Coordenadas Relativas dos restantres Cubos
+0 1 0
+0 2 0
+1 0 0
+2 0 0

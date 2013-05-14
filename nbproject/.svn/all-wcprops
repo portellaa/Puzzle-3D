@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/cv-puzzle3d/!svn/ver/33/Puzzle%203D/nbproject
+END
+Package-Release.bash
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/cv-puzzle3d/!svn/ver/7/Puzzle%203D/nbproject/Package-Release.bash
+END
+Package-Debug.bash
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/cv-puzzle3d/!svn/ver/7/Puzzle%203D/nbproject/Package-Debug.bash
+END
+Makefile-Release.mk
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/cv-puzzle3d/!svn/ver/7/Puzzle%203D/nbproject/Makefile-Release.mk
+END
+Makefile-variables.mk
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/cv-puzzle3d/!svn/ver/7/Puzzle%203D/nbproject/Makefile-variables.mk
+END
+Makefile-impl.mk
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/cv-puzzle3d/!svn/ver/2/Puzzle%203D/nbproject/Makefile-impl.mk
+END
+Makefile-Debug.mk
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/cv-puzzle3d/!svn/ver/33/Puzzle%203D/nbproject/Makefile-Debug.mk
+END

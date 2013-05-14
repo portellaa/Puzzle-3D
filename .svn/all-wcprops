@@ -1,0 +1,143 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/cv-puzzle3d/!svn/ver/59/Puzzle%203D
+END
+rendering.c
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/cv-puzzle3d/!svn/ver/52/Puzzle%203D/rendering.c
+END
+modelos.c
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/cv-puzzle3d/!svn/ver/58/Puzzle%203D/modelos.c
+END
+viewing3D.c
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/cv-puzzle3d/!svn/ver/57/Puzzle%203D/viewing3D.c
+END
+callbacks.c
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/cv-puzzle3d/!svn/ver/58/Puzzle%203D/callbacks.c
+END
+rendering.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/cv-puzzle3d/!svn/ver/52/Puzzle%203D/rendering.h
+END
+modelos.h
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/cv-puzzle3d/!svn/ver/52/Puzzle%203D/modelos.h
+END
+viewing3D.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/cv-puzzle3d/!svn/ver/52/Puzzle%203D/viewing3D.h
+END
+callbacks.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/cv-puzzle3d/!svn/ver/52/Puzzle%203D/callbacks.h
+END
+menus.c
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/cv-puzzle3d/!svn/ver/57/Puzzle%203D/menus.c
+END
+inicializacoes.c
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/cv-puzzle3d/!svn/ver/59/Puzzle%203D/inicializacoes.c
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/cv-puzzle3d/!svn/ver/2/Puzzle%203D/Makefile
+END
+globais.h
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/cv-puzzle3d/!svn/ver/59/Puzzle%203D/globais.h
+END
+main.c
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/cv-puzzle3d/!svn/ver/58/Puzzle%203D/main.c
+END
+menus.h
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/cv-puzzle3d/!svn/ver/52/Puzzle%203D/menus.h
+END
+inicializacoes.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/cv-puzzle3d/!svn/ver/52/Puzzle%203D/inicializacoes.h
+END
+consoleIO.c
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/cv-puzzle3d/!svn/ver/57/Puzzle%203D/consoleIO.c
+END
+focos.c
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/cv-puzzle3d/!svn/ver/52/Puzzle%203D/focos.c
+END
+propsMateriais.c
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/cv-puzzle3d/!svn/ver/52/Puzzle%203D/propsMateriais.c
+END
+consoleIO.h
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/cv-puzzle3d/!svn/ver/52/Puzzle%203D/consoleIO.h
+END
+focos.h
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/cv-puzzle3d/!svn/ver/52/Puzzle%203D/focos.h
+END
+propsMateriais.h
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/cv-puzzle3d/!svn/ver/52/Puzzle%203D/propsMateriais.h
+END
+estDados.c
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/cv-puzzle3d/!svn/ver/56/Puzzle%203D/estDados.c
+END
+estDados.h
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/cv-puzzle3d/!svn/ver/55/Puzzle%203D/estDados.h
+END
